@@ -1,0 +1,91 @@
+@page "/register"
+@using DevWiki.Client.Models
+@using DevWiki.Client.Services
+@inject IAuthService AuthService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Регистрация - DevWiki</PageTitle>
+
+<div class="row justify-content-center mt-5 pt-5">
+    <div class="col-md-8 col-lg-5">
+        <div class="text-center mb-5">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-3 text-white"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            <h2 class="fw-bold text-white">Создайте аккаунт</h2>
+            <p class="text-muted">Присоединяйтесь к базе знаний DevWiki</p>
+        </div>
+
+        <div class="modern-card">
+            @if (showError)
+            {
+                <div class="alert bg-danger text-white border-0 d-flex align-items-center mb-4" style="border-radius: var(--radius); padding: 1rem;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="me-2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> 
+                    Ошибка при регистрации. Возможно, логин занят.
+                </div>
+            }
+
+            <EditForm Model="@registerModel" OnValidSubmit="HandleRegister">
+                <DataAnnotationsValidator />
+
+                <div class="mb-4">
+                    <label for="username" class="form-label-modern">Имя пользователя</label>
+                    <InputText id="username" class="form-control-modern" placeholder="Придумайте логин" @bind-Value="registerModel.Username" />
+                    <ValidationMessage For="@(() => registerModel.Username)" class="text-danger mt-1 small" />
+                </div>
+
+                <div class="mb-4">
+                    <label for="password" class="form-label-modern">Пароль</label>
+                    <InputText type="password" id="password" class="form-control-modern" placeholder="Минимум 6 символов" @bind-Value="registerModel.Password" />
+                    <ValidationMessage For="@(() => registerModel.Password)" class="text-danger mt-1 small" />
+                </div>
+
+                <div class="mb-5">
+                    <label for="confirmPassword" class="form-label-modern">Повторите пароль</label>
+                    <InputText type="password" id="confirmPassword" class="form-control-modern" placeholder="Пароли должны совпадать" @bind-Value="registerModel.ConfirmPassword" />
+                    <ValidationMessage For="@(() => registerModel.ConfirmPassword)" class="text-danger mt-1 small" />
+                </div>
+
+                <div class="d-grid mb-4">
+                    <button type="submit" class="btn-modern btn-primary-modern py-2" disabled="@isLoading">
+                        @if (isLoading)
+                        {
+                            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                            <span>Создание аккаунта...</span>
+                        }
+                        else
+                        {
+                            <span>Зарегистрироваться</span>
+                        }
+                    </button>
+                </div>
+            </EditForm>
+            
+            <div class="text-center text-muted mt-4 border-top pt-4" style="border-color: var(--border-color) !important;">
+                <p class="mb-0">Уже есть аккаунт? <a href="/login" class="text-white text-decoration-underline">Войти</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private RegisterDto registerModel = new();
+    private bool isLoading;
+    private bool showError;
+
+    private async Task HandleRegister()
+    {
+        isLoading = true;
+        showError = false;
+
+        var result = await AuthService.RegisterAsync(registerModel);
+
+        if (result)
+        {
+            NavigationManager.NavigateTo("/login");
+        }
+        else
+        {
+            showError = true;
+            isLoading = false;
+        }
+    }
+}

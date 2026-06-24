@@ -1,0 +1,133 @@
+@page "/articles/{Id:guid}"
+@using DevWiki.Client.Models
+@using DevWiki.Client.Services
+@using Markdig
+@inject IArticleService ArticleService
+@inject IJSRuntime IJSRuntime
+@inject IToastService ToastService
+
+<PageTitle>@(article?.Title ?? "Загрузка...") - DevWiki</PageTitle>
+
+@if (isLoading)
+{
+    <div class="row justify-content-center mt-4">
+        <div class="col-lg-9">
+            <div class="skeleton skeleton-text short mb-4" style="width: 150px;"></div>
+            
+            <div class="modern-card p-4">
+                <header class="mb-5 pb-4 border-bottom" style="border-color: var(--border-color) !important;">
+                    <div class="skeleton skeleton-title" style="height: 2.5rem; width: 80%;"></div>
+                    <div class="skeleton skeleton-title" style="height: 2.5rem; width: 50%;"></div>
+                    
+                    <div class="d-flex gap-3 mt-4">
+                        <div class="skeleton skeleton-text" style="width: 150px;"></div>
+                        <div class="skeleton skeleton-text" style="width: 100px;"></div>
+                    </div>
+                </header>
+
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text" style="width: 80%;"></div>
+                <div class="skeleton skeleton-text mt-4"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text" style="width: 60%;"></div>
+            </div>
+        </div>
+    </div>
+}
+else if (article == null)
+{
+    <div class="modern-card text-center py-5">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="text-muted mb-4"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+        <h3 class="mb-3">Статья не найдена</h3>
+        <p class="text-muted mb-4">Возможно, она была удалена или ссылка неверна.</p>
+        <a href="/" class="btn-modern btn-primary-modern text-decoration-none">На главную</a>
+    </div>
+}
+else
+{
+    <div class="row justify-content-center mt-4">
+        <div class="col-lg-9">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <a href="/" class="text-muted text-decoration-none d-inline-flex align-items-center">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    К списку статей
+                </a>
+
+                <AuthorizeView>
+                    <Authorized>
+                        <div class="d-flex gap-2">
+                            <a href="/articles/edit/@article.Id" class="btn-modern btn-secondary-modern btn-sm text-decoration-none py-1 px-3">Редактировать</a>
+                            <button class="btn-modern btn-secondary-modern btn-sm py-1 px-3" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.2);" @onclick="DeleteArticle">Удалить</button>
+                        </div>
+                    </Authorized>
+                </AuthorizeView>
+            </div>
+
+            <article class="modern-card p-4">
+                <header class="mb-5 pb-4 border-bottom" style="border-color: var(--border-color) !important;">
+                    <h1 class="fw-bold text-white mb-3" style="font-size: 2.5rem; line-height: 1.2; letter-spacing: -0.04em;">@article.Title</h1>
+                    
+                    <div class="d-flex align-items-center flex-wrap gap-3 text-muted">
+                        <div class="d-flex align-items-center tabular-nums">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                            @article.CreatedAt.ToString("dd MMMM yyyy, HH:mm")
+                        </div>
+                        
+                        @if (article.Tags != null && article.Tags.Any())
+                        {
+                            <div class="d-flex align-items-center gap-2">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-1"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                                @foreach (var tag in article.Tags)
+                                {
+                                    <span class="badge-modern">@tag</span>
+                                }
+                            </div>
+                        }
+                    </div>
+                </header>
+
+                <div class="markdown-body">
+                    @((MarkupString)Markdown.ToHtml(article.Content, pipeline))
+                </div>
+            </article>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public Guid Id { get; set; }
+
+    private ArticleDto? article;
+    private bool isLoading = true;
+    private MarkdownPipeline pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
+
+    [Inject]
+    private NavigationManager NavigationManager { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        article = await ArticleService.GetArticleByIdAsync(Id);
+        isLoading = false;
+    }
+
+    private async Task DeleteArticle()
+    {
+        var confirmed = await IJSRuntime.InvokeAsync<bool>("confirm", "Вы уверены, что хотите удалить эту статью?");
+        if (confirmed)
+        {
+            var success = await ArticleService.DeleteArticleAsync(Id);
+            if (success)
+            {
+                ToastService.ShowSuccess("Статья была успешно удалена");
+                NavigationManager.NavigateTo("/");
+            }
+            else
+            {
+                ToastService.ShowError("Не удалось удалить статью");
+            }
+        }
+    }
+}

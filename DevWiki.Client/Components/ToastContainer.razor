@@ -1,0 +1,32 @@
+@using DevWiki.Client.Services
+@implements IDisposable
+@inject IToastService ToastService
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1055;">
+    @foreach (var toast in ToastService.Messages)
+    {
+        <div class="toast show mb-3 border-0" role="alert" aria-live="assertive" aria-atomic="true" style="background: var(--bg-card); box-shadow: 0 10px 40px rgba(0,0,0,0.8); border-radius: var(--radius);">
+            <div class="toast-header border-bottom border-secondary text-white" style="background: rgba(255,255,255,0.05);">
+                <strong class="me-auto @(toast.Type == "error" ? "text-danger" : "text-success")">
+                    @toast.Title
+                </strong>
+                <button type="button" class="btn-close btn-close-white" aria-label="Close" @onclick="() => ToastService.Remove(toast.Id)"></button>
+            </div>
+            <div class="toast-body text-white">
+                @toast.Message
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        ToastService.OnChanged += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        ToastService.OnChanged -= StateHasChanged;
+    }
+}

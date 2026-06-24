@@ -1,0 +1,15 @@
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Application\bin\Debug\net8.0\DevWiki.Application.deps.json
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Application\bin\Debug\net8.0\DevWiki.Application.dll
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Application\bin\Debug\net8.0\DevWiki.Application.pdb
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Application\bin\Debug\net8.0\DevWiki.Domain.dll
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Application\bin\Debug\net8.0\DevWiki.Domain.pdb
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Application\obj\Debug\net8.0\DevWiki.Application.csproj.AssemblyReference.cache
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Application\obj\Debug\net8.0\DevWiki.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Application\obj\Debug\net8.0\DevWiki.Application.AssemblyInfoInputs.cache
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Application\obj\Debug\net8.0\DevWiki.Application.AssemblyInfo.cs
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Application\obj\Debug\net8.0\DevWiki.Application.csproj.CoreCompileInputs.cache
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Application\obj\Debug\net8.0\DevWiki..052E780A.Up2Date
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Application\obj\Debug\net8.0\DevWiki.Application.dll
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Application\obj\Debug\net8.0\refint\DevWiki.Application.dll
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Application\obj\Debug\net8.0\DevWiki.Application.pdb
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Application\obj\Debug\net8.0\ref\DevWiki.Application.dll

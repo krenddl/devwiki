@@ -1,0 +1,149 @@
+@page "/articles/edit/{Id:guid}"
+@using DevWiki.Client.Models
+@using DevWiki.Client.Services
+@using Microsoft.AspNetCore.Authorization
+@using Markdig
+@attribute [Authorize]
+@inject IArticleService ArticleService
+@inject NavigationManager NavigationManager
+@inject IToastService ToastService
+
+<PageTitle>Редактировать статью - DevWiki</PageTitle>
+
+<div class="row justify-content-center mt-4">
+    <div class="col-lg-8">
+        <div class="d-flex align-items-center mb-4">
+            <a href="/articles/@Id" class="text-muted me-3 text-decoration-none">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            </a>
+            <h2 class="mb-0 text-white">Редактирование статьи</h2>
+        </div>
+
+        @if (isPageLoading)
+        {
+            <div class="d-flex justify-content-center my-5">
+                <div class="spinner-border text-muted" role="status">
+                    <span class="visually-hidden">Загрузка...</span>
+                </div>
+            </div>
+        }
+        else if (articleModel != null)
+        {
+            <div class="modern-card">
+                <EditForm Model="@articleModel" OnValidSubmit="HandleUpdate">
+                    <DataAnnotationsValidator />
+
+                    <div class="mb-4">
+                        <label for="title" class="form-label-modern">Заголовок</label>
+                        <InputText id="title" class="form-control-modern" placeholder="Название статьи" @bind-Value="articleModel.Title" />
+                        <ValidationMessage For="@(() => articleModel.Title)" class="text-danger mt-1 small" />
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="tags" class="form-label-modern">Теги</label>
+                        <InputText id="tags" class="form-control-modern" placeholder="react, csharp, tutorial" @bind-Value="articleModel.Tags" />
+                        <div class="form-text text-muted mt-1 small">Разделяйте запятыми. Например: C#, .NET, WebApi</div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between align-items-end mb-2 border-bottom pb-2" style="border-color: var(--border-color) !important;">
+                            <ul class="nav nav-pills" style="gap: 0.5rem; margin-bottom: -1px;">
+                                <li class="nav-item">
+                                    <button type="button" class="nav-link-custom border-0 bg-transparent @(showPreview ? "" : "active text-white")" @onclick="() => showPreview = false" style="cursor: pointer; padding: 0.25rem 0.75rem;">Редактор</button>
+                                </li>
+                                <li class="nav-item">
+                                    <button type="button" class="nav-link-custom border-0 bg-transparent @(showPreview ? "active text-white" : "")" @onclick="() => showPreview = true" style="cursor: pointer; padding: 0.25rem 0.75rem;">Предпросмотр</button>
+                                </li>
+                            </ul>
+                            <span class="badge-modern">Markdown</span>
+                        </div>
+                        
+                        @if (!showPreview)
+                        {
+                            <InputTextArea id="content" class="form-control-modern" rows="16" placeholder="# Заголовок&#10;&#10;Ваш текст здесь..." @bind-Value="articleModel.Content" style="font-family: Consolas, monospace; line-height: 1.6;" />
+                        }
+                        else
+                        {
+                            <div class="form-control-modern markdown-body" style="min-height: 400px; background-color: var(--bg-main); border-color: transparent;">
+                                @if (!string.IsNullOrWhiteSpace(articleModel.Content))
+                                {
+                                    @((MarkupString)Markdig.Markdown.ToHtml(articleModel.Content, pipeline))
+                                }
+                                else
+                                {
+                                    <p class="text-muted fst-italic">Здесь будет предпросмотр вашей статьи...</p>
+                                }
+                            </div>
+                        }
+                        <ValidationMessage For="@(() => articleModel.Content)" class="text-danger mt-1 small" />
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-3 mt-4 pt-4 border-top" style="border-color: var(--border-color) !important;">
+                        <a href="/articles/@Id" class="btn-modern btn-secondary-modern text-decoration-none">Отмена</a>
+                        <button type="submit" class="btn-modern btn-primary-modern" disabled="@isLoading">
+                            @if (isLoading)
+                            {
+                                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                <span>Сохранение...</span>
+                            }
+                            else
+                            {
+                                <span>Сохранить</span>
+                            }
+                        </button>
+                    </div>
+                </EditForm>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Guid Id { get; set; }
+
+    private UpdateArticleDto? articleModel;
+    private bool isPageLoading = true;
+    private bool isLoading;
+    private bool showPreview;
+    private Markdig.MarkdownPipeline pipeline = new Markdig.MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var existingArticle = await ArticleService.GetArticleByIdAsync(Id);
+        if (existingArticle != null)
+        {
+            articleModel = new UpdateArticleDto
+            {
+                Id = existingArticle.Id,
+                Title = existingArticle.Title,
+                Content = existingArticle.Content,
+                Tags = existingArticle.Tags != null ? string.Join(", ", existingArticle.Tags) : ""
+            };
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/");
+        }
+        isPageLoading = false;
+    }
+
+    private async Task HandleUpdate()
+    {
+        if (articleModel == null) return;
+        
+        isLoading = true;
+        var success = await ArticleService.UpdateArticleAsync(Id, articleModel);
+        
+        if (success)
+        {
+            ToastService.ShowSuccess("Статья успешно обновлена!");
+            NavigationManager.NavigateTo($"/articles/{Id}");
+        }
+        else
+        {
+            isLoading = false;
+            ToastService.ShowError("Произошла ошибка при обновлении статьи.");
+        }
+    }
+}

@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="DevWiki.API/DevWiki.API.csproj" />
+  <Project Path="DevWiki.Application/DevWiki.Application.csproj" />
+  <Project Path="DevWiki.Client/DevWiki.Client.csproj" />
+  <Project Path="DevWiki.Domain/DevWiki.Domain.csproj" />
+  <Project Path="DevWiki.Infrastructure/DevWiki.Infrastructure.csproj" />
+</Solution>

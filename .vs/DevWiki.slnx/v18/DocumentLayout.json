@@ -1,0 +1,240 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FE4C9E09-55EE-A2A1-5407-804915CF9402}|DevWiki.Client\\DevWiki.Client.csproj|c:\\users\\uryuqq\\source\\repos\\devwiki\\devwiki.client\\pages\\articles\\articledetails.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FE4C9E09-55EE-A2A1-5407-804915CF9402}|DevWiki.Client\\DevWiki.Client.csproj|solutionrelative:devwiki.client\\pages\\articles\\articledetails.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE4C9E09-55EE-A2A1-5407-804915CF9402}|DevWiki.Client\\DevWiki.Client.csproj|c:\\users\\uryuqq\\source\\repos\\devwiki\\devwiki.client\\auth\\customauthstateprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE4C9E09-55EE-A2A1-5407-804915CF9402}|DevWiki.Client\\DevWiki.Client.csproj|solutionrelative:devwiki.client\\auth\\customauthstateprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AA7373A5-EAE4-2445-75A6-202BD52B998B}|DevWiki.Application\\DevWiki.Application.csproj|c:\\users\\uryuqq\\source\\repos\\devwiki\\devwiki.application\\articles\\commands\\createarticle\\createarticlecommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AA7373A5-EAE4-2445-75A6-202BD52B998B}|DevWiki.Application\\DevWiki.Application.csproj|solutionrelative:devwiki.application\\articles\\commands\\createarticle\\createarticlecommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AA7373A5-EAE4-2445-75A6-202BD52B998B}|DevWiki.Application\\DevWiki.Application.csproj|c:\\users\\uryuqq\\source\\repos\\devwiki\\devwiki.application\\articles\\commands\\createarticle\\createarticlecommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AA7373A5-EAE4-2445-75A6-202BD52B998B}|DevWiki.Application\\DevWiki.Application.csproj|solutionrelative:devwiki.application\\articles\\commands\\createarticle\\createarticlecommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5A834F4-34BF-B98D-4752-9BBCF5873D15}|DevWiki.Infrastructure\\DevWiki.Infrastructure.csproj|c:\\users\\uryuqq\\source\\repos\\devwiki\\devwiki.infrastructure\\persistence\\applicationdbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5A834F4-34BF-B98D-4752-9BBCF5873D15}|DevWiki.Infrastructure\\DevWiki.Infrastructure.csproj|solutionrelative:devwiki.infrastructure\\persistence\\applicationdbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AA7373A5-EAE4-2445-75A6-202BD52B998B}|DevWiki.Application\\DevWiki.Application.csproj|c:\\users\\uryuqq\\source\\repos\\devwiki\\devwiki.application\\articles\\queries\\getarticlesquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AA7373A5-EAE4-2445-75A6-202BD52B998B}|DevWiki.Application\\DevWiki.Application.csproj|solutionrelative:devwiki.application\\articles\\queries\\getarticlesquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AA7373A5-EAE4-2445-75A6-202BD52B998B}|DevWiki.Application\\DevWiki.Application.csproj|c:\\users\\uryuqq\\source\\repos\\devwiki\\devwiki.application\\interfaces\\iapplicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AA7373A5-EAE4-2445-75A6-202BD52B998B}|DevWiki.Application\\DevWiki.Application.csproj|solutionrelative:devwiki.application\\interfaces\\iapplicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9EDAD007-B47E-7E1B-5ACB-FE5157193B0A}|DevWiki.API\\DevWiki.API.csproj|c:\\users\\uryuqq\\source\\repos\\devwiki\\devwiki.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{9EDAD007-B47E-7E1B-5ACB-FE5157193B0A}|DevWiki.API\\DevWiki.API.csproj|solutionrelative:devwiki.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5A834F4-34BF-B98D-4752-9BBCF5873D15}|DevWiki.Infrastructure\\DevWiki.Infrastructure.csproj|c:\\users\\uryuqq\\source\\repos\\devwiki\\devwiki.infrastructure\\persistence\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5A834F4-34BF-B98D-4752-9BBCF5873D15}|DevWiki.Infrastructure\\DevWiki.Infrastructure.csproj|solutionrelative:devwiki.infrastructure\\persistence\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1ACF29FD-52B4-3F27-2950-0446BE816861}|DevWiki.Domain\\DevWiki.Domain.csproj|c:\\users\\uryuqq\\source\\repos\\devwiki\\devwiki.domain\\entities\\article.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1ACF29FD-52B4-3F27-2950-0446BE816861}|DevWiki.Domain\\DevWiki.Domain.csproj|solutionrelative:devwiki.domain\\entities\\article.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1ACF29FD-52B4-3F27-2950-0446BE816861}|DevWiki.Domain\\DevWiki.Domain.csproj|c:\\users\\uryuqq\\source\\repos\\devwiki\\devwiki.domain\\entities\\tag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1ACF29FD-52B4-3F27-2950-0446BE816861}|DevWiki.Domain\\DevWiki.Domain.csproj|solutionrelative:devwiki.domain\\entities\\tag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1ACF29FD-52B4-3F27-2950-0446BE816861}|DevWiki.Domain\\DevWiki.Domain.csproj|c:\\users\\uryuqq\\source\\repos\\devwiki\\devwiki.domain\\entities\\articletag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1ACF29FD-52B4-3F27-2950-0446BE816861}|DevWiki.Domain\\DevWiki.Domain.csproj|solutionrelative:devwiki.domain\\entities\\articletag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1ACF29FD-52B4-3F27-2950-0446BE816861}|DevWiki.Domain\\DevWiki.Domain.csproj|c:\\users\\uryuqq\\source\\repos\\devwiki\\devwiki.domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1ACF29FD-52B4-3F27-2950-0446BE816861}|DevWiki.Domain\\DevWiki.Domain.csproj|solutionrelative:devwiki.domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ArticleDetails.razor",
+              "DocumentMoniker": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Client\\Pages\\Articles\\ArticleDetails.razor",
+              "RelativeDocumentMoniker": "DevWiki.Client\\Pages\\Articles\\ArticleDetails.razor",
+              "ToolTip": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Client\\Pages\\Articles\\ArticleDetails.razor",
+              "RelativeToolTip": "DevWiki.Client\\Pages\\Articles\\ArticleDetails.razor",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAvwE0AAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-24T16:17:54.713Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CustomAuthStateProvider.cs",
+              "DocumentMoniker": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Client\\Auth\\CustomAuthStateProvider.cs",
+              "RelativeDocumentMoniker": "DevWiki.Client\\Auth\\CustomAuthStateProvider.cs",
+              "ToolTip": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Client\\Auth\\CustomAuthStateProvider.cs",
+              "RelativeToolTip": "DevWiki.Client\\Auth\\CustomAuthStateProvider.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T15:48:59.719Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CreateArticleCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Application\\Articles\\Commands\\CreateArticle\\CreateArticleCommandHandler.cs",
+              "RelativeDocumentMoniker": "DevWiki.Application\\Articles\\Commands\\CreateArticle\\CreateArticleCommandHandler.cs",
+              "ToolTip": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Application\\Articles\\Commands\\CreateArticle\\CreateArticleCommandHandler.cs",
+              "RelativeToolTip": "DevWiki.Application\\Articles\\Commands\\CreateArticle\\CreateArticleCommandHandler.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABUAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T15:09:44.095Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CreateArticleCommand.cs",
+              "DocumentMoniker": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Application\\Articles\\Commands\\CreateArticle\\CreateArticleCommand.cs",
+              "RelativeDocumentMoniker": "DevWiki.Application\\Articles\\Commands\\CreateArticle\\CreateArticleCommand.cs",
+              "ToolTip": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Application\\Articles\\Commands\\CreateArticle\\CreateArticleCommand.cs",
+              "RelativeToolTip": "DevWiki.Application\\Articles\\Commands\\CreateArticle\\CreateArticleCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T15:09:43.476Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GetArticlesQuery.cs",
+              "DocumentMoniker": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Application\\Articles\\Queries\\GetArticlesQuery.cs",
+              "RelativeDocumentMoniker": "DevWiki.Application\\Articles\\Queries\\GetArticlesQuery.cs",
+              "ToolTip": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Application\\Articles\\Queries\\GetArticlesQuery.cs",
+              "RelativeToolTip": "DevWiki.Application\\Articles\\Queries\\GetArticlesQuery.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAABcAAABuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T13:18:16.146Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "IApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Application\\Interfaces\\IApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "DevWiki.Application\\Interfaces\\IApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Application\\Interfaces\\IApplicationDbContext.cs",
+              "RelativeToolTip": "DevWiki.Application\\Interfaces\\IApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T12:49:23.588Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ApplicationDbContextFactory.cs",
+              "DocumentMoniker": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Infrastructure\\Persistence\\ApplicationDbContextFactory.cs",
+              "RelativeDocumentMoniker": "DevWiki.Infrastructure\\Persistence\\ApplicationDbContextFactory.cs",
+              "ToolTip": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Infrastructure\\Persistence\\ApplicationDbContextFactory.cs",
+              "RelativeToolTip": "DevWiki.Infrastructure\\Persistence\\ApplicationDbContextFactory.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABAAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T12:45:48.539Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.API\\appsettings.json",
+              "RelativeDocumentMoniker": "DevWiki.API\\appsettings.json",
+              "ToolTip": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.API\\appsettings.json",
+              "RelativeToolTip": "DevWiki.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-24T12:43:12.108Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Infrastructure\\Persistence\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "DevWiki.Infrastructure\\Persistence\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Infrastructure\\Persistence\\ApplicationDbContext.cs",
+              "RelativeToolTip": "DevWiki.Infrastructure\\Persistence\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAowBkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T11:47:31.941Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ArticleTag.cs",
+              "DocumentMoniker": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Domain\\Entities\\ArticleTag.cs",
+              "RelativeDocumentMoniker": "DevWiki.Domain\\Entities\\ArticleTag.cs",
+              "ToolTip": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Domain\\Entities\\ArticleTag.cs",
+              "RelativeToolTip": "DevWiki.Domain\\Entities\\ArticleTag.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-23T21:42:50.181Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Tag.cs",
+              "DocumentMoniker": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Domain\\Entities\\Tag.cs",
+              "RelativeDocumentMoniker": "DevWiki.Domain\\Entities\\Tag.cs",
+              "ToolTip": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Domain\\Entities\\Tag.cs",
+              "RelativeToolTip": "DevWiki.Domain\\Entities\\Tag.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-23T21:42:42.613Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Article.cs",
+              "DocumentMoniker": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Domain\\Entities\\Article.cs",
+              "RelativeDocumentMoniker": "DevWiki.Domain\\Entities\\Article.cs",
+              "ToolTip": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Domain\\Entities\\Article.cs",
+              "RelativeToolTip": "DevWiki.Domain\\Entities\\Article.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-23T21:42:36.908Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Domain\\Entities\\User.cs",
+              "RelativeDocumentMoniker": "DevWiki.Domain\\Entities\\User.cs",
+              "ToolTip": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Domain\\Entities\\User.cs",
+              "RelativeToolTip": "DevWiki.Domain\\Entities\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-23T21:42:29.11Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

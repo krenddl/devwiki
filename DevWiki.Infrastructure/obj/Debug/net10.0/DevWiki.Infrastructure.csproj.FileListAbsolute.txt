@@ -1,0 +1,17 @@
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Infrastructure\bin\Debug\net10.0\DevWiki.Infrastructure.deps.json
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Infrastructure\bin\Debug\net10.0\DevWiki.Infrastructure.dll
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Infrastructure\bin\Debug\net10.0\DevWiki.Infrastructure.pdb
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Infrastructure\bin\Debug\net10.0\DevWiki.Application.dll
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Infrastructure\bin\Debug\net10.0\DevWiki.Domain.dll
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Infrastructure\bin\Debug\net10.0\DevWiki.Application.pdb
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Infrastructure\bin\Debug\net10.0\DevWiki.Domain.pdb
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Infrastructure\obj\Debug\net10.0\DevWiki.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Infrastructure\obj\Debug\net10.0\DevWiki.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Infrastructure\obj\Debug\net10.0\DevWiki.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Infrastructure\obj\Debug\net10.0\DevWiki.Infrastructure.AssemblyInfo.cs
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Infrastructure\obj\Debug\net10.0\DevWiki.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Infrastructure\obj\Debug\net10.0\DevWiki..905A2413.Up2Date
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Infrastructure\obj\Debug\net10.0\DevWiki.Infrastructure.dll
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Infrastructure\obj\Debug\net10.0\refint\DevWiki.Infrastructure.dll
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Infrastructure\obj\Debug\net10.0\DevWiki.Infrastructure.pdb
+C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Infrastructure\obj\Debug\net10.0\ref\DevWiki.Infrastructure.dll

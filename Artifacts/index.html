@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevWiki - Terminal Interface</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap');
+
+        :root {
+            --term-bg: #050505;
+            --term-fg: #d4d4d4;
+            --term-green: #3fb950;
+            --term-blue: #58a6ff;
+            --term-dim: #6e7681;
+            --term-red: #ff7b72;
+            --term-yellow: #e3b341;
+            --term-border: #30363d;
+        }
+
+        body {
+            margin: 0;
+            background-color: #0d1117;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .terminal-window {
+            width: 100%;
+            max-width: 1000px;
+            height: 80vh;
+            max-height: 700px;
+            background-color: var(--term-bg);
+            border: 1px solid var(--term-border);
+            border-radius: 10px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background-color: #161b22;
+            border-bottom: 1px solid var(--term-border);
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            color: var(--term-dim);
+            font-size: 0.85rem;
+            user-select: none;
+            flex-shrink: 0;
+        }
+
+        .term-dots { display: flex; gap: 8px; margin-right: 15px; }
+        .term-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot-close { background-color: #ff5f56; }
+        .dot-min { background-color: #ffbd2e; }
+        .dot-max { background-color: #27c93f; }
+
+        .terminal-body {
+            padding: 20px 25px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--term-fg);
+            flex-grow: 1;
+            overflow-y: auto;
+            cursor: text;
+        }
+
+        /* Custom scrollbar */
+        .terminal-body::-webkit-scrollbar { width: 8px; }
+        .terminal-body::-webkit-scrollbar-track { background: var(--term-bg); }
+        .terminal-body::-webkit-scrollbar-thumb { background: var(--term-border); border-radius: 4px; }
+
+        .line { margin-bottom: 4px; display: flex; flex-wrap: wrap; white-space: pre-wrap; word-break: break-all;}
+        
+        .prompt-text {
+            color: var(--term-green);
+            font-weight: 600;
+            margin-right: 8px;
+            white-space: nowrap;
+        }
+
+        .dim { color: var(--term-dim); }
+        .accent { color: var(--term-green); }
+        .blue { color: var(--term-blue); }
+        .error { color: var(--term-red); }
+        .yellow { color: var(--term-yellow); }
+
+        .log-block {
+            margin: 10px 0 15px 0;
+            padding-left: 15px;
+            border-left: 2px solid var(--term-border);
+        }
+
+        .input-wrapper {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        #cmdInput {
+            background: transparent;
+            border: none;
+            color: var(--term-fg);
+            font-family: inherit;
+            font-size: inherit;
+            flex-grow: 1;
+            outline: none;
+            caret-color: var(--term-fg);
+        }
+
+        .article-table {
+            display: grid;
+            grid-template-columns: 50px 1fr 200px;
+            gap: 15px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        
+        .article-content {
+            margin-top: 10px;
+            padding: 15px;
+            background: #0d1117;
+            border: 1px dashed var(--term-border);
+            border-radius: 5px;
+        }
+
+        .ascii-art {
+            color: var(--term-blue);
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="terminal-window">
+        <div class="terminal-header">
+            <div class="term-dots">
+                <div class="term-dot dot-close"></div>
+                <div class="term-dot dot-min"></div>
+                <div class="term-dot dot-max"></div>
+            </div>
+            bash — DevWiki-App (tty1)
+        </div>
+        
+        <div class="terminal-body" id="terminalBody">
+            <div id="output"></div>
+            
+            <div class="input-wrapper">
+                <span class="prompt-text" id="promptSign">guest@devwiki:~$</span>
+                <input type="text" id="cmdInput" autocomplete="off" spellcheck="false" autofocus>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const outputDiv = document.getElementById('output');
+        const cmdInput = document.getElementById('cmdInput');
+        const terminalBody = document.getElementById('terminalBody');
+        const promptSign = document.getElementById('promptSign');
+
+        let currentUser = 'guest';
+
+        // Mock Database for DevWiki
+        const db = [
+            { id: 1, title: 'Настройка Docker-compose для PostgreSQL', tags: '[docker, db, guide]', date: '2026-06-20' },
+            { id: 2, title: 'Паттерн CQRS + MediatR в .NET 8', tags: '[csharp, architecture]', date: '2026-06-22' },
+            { id: 3, title: 'Полезные алиасы для Git', tags: '[git, bash, tools]', date: '2026-06-24' }
+        ];
+
+        const articleContents = {
+            1: "# Настройка Docker\n\nДля запуска PostgreSQL используйте файл docker-compose.yml:\n\nversion: '3.8'\nservices:\n  db:\n    image: postgres:15\n    environment:\n      POSTGRES_PASSWORD: mysecretpassword\n    ports:\n      - '5432:5432'",
+            2: "CQRS (Command Query Responsibility Segregation) разделяет операции чтения и записи.\nMediatR помогает реализовать это через диспетчеризацию.\n\npublic record CreateArticleCommand(string Title) : IRequest<int>;\n\nЭто позволяет делать контроллеры тонкими и тестируемыми.",
+            3: "Добавьте это в ~/.gitconfig:\n\n[alias]\n    co = checkout\n    br = branch\n    ci = commit\n    st = status\n    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short"
+        };
+
+        const bootSequence = [
+            "<div class='ascii-art'>  ____             __        ___ _    _ <br> |  _ \\  _____   _ \\ \\      / (_) | _(_) <br> | | | |/ _ \\ \\ / / \\ \\ /\\ / /| | |/ / | <br> | |_| |  __/\\ V /   \\ V  V / | |   <| | <br> |____/ \\___| \\_/     \\_/\\_/  |_|_|\\_\\_| v.1.0.0</div>",
+            "<div class='line dim'>[System] Booting DevWiki WebAssembly Client...</div>",
+            "<div class='line dim'>[System] Connecting to API... <span class='accent'>OK</span> (Ping: 12ms)</div>",
+            "<div class='line dim'>[System] Initializing Markdown Engine... <span class='accent'>OK</span></div>",
+            "<div class='line'>Type <span class='blue'>'help'</span> to see available commands.</div><br>"
+        ];
+
+        function printLine(html) {
+            outputDiv.innerHTML += html;
+            scrollToBottom();
+        }
+
+        function scrollToBottom() {
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        }
+
+        // Keep focus on input when clicking anywhere on terminal
+        terminalBody.addEventListener('click', () => {
+            cmdInput.focus();
+        });
+
+        // Handle Enter key
+        cmdInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const cmd = this.value.trim();
+                this.value = '';
+                
+                // Print the prompt and the command
+                printLine(`<div class='line'><span class='prompt-text'>${currentUser}@devwiki:~$</span> ${cmd}</div>`);
+                
+                if (cmd) {
+                    processCommand(cmd);
+                }
+            }
+        });
+
+        function processCommand(rawCmd) {
+            const args = rawCmd.split(' ').filter(Boolean);
+            const cmd = args[0].toLowerCase();
+
+            switch (cmd) {
+                case 'help':
+                    printLine(`
+                        <div class='log-block'>
+                            <div class='line'><span class='blue' style='width: 80px;'>ls</span> - Показать список статей в базе данных</div>
+                            <div class='line'><span class='blue' style='width: 80px;'>read [id]</span> - Открыть статью по ID (например: read 1)</div>
+                            <div class='line'><span class='blue' style='width: 80px;'>login</span> - Авторизоваться как администратор</div>
+                            <div class='line'><span class='blue' style='width: 80px;'>whoami</span> - Показать текущего пользователя</div>
+                            <div class='line'><span class='blue' style='width: 80px;'>clear</span> - Очистить экран терминала</div>
+                        </div>
+                    `);
+                    break;
+                case 'ls':
+                    let tableHtml = `<div class='log-block'>`;
+                    tableHtml += `<div class='article-table dim' style='border-bottom: 1px solid var(--term-border); padding-bottom: 5px;'><span>ID</span><span>TITLE</span><span>TAGS</span></div>`;
+                    db.forEach(article => {
+                        tableHtml += `<div class='article-table'>
+                            <span class='accent'>${article.id}</span>
+                            <span>${article.title}</span>
+                            <span class='dim'>${article.tags}</span>
+                        </div>`;
+                    });
+                    tableHtml += `</div>`;
+                    printLine(tableHtml);
+                    break;
+                case 'read':
+                    const id = args[1];
+                    if (!id || isNaN(id)) {
+                        printLine(`<div class='line error'>Ошибка: Укажите ID статьи (например: read 1)</div>`);
+                        break;
+                    }
+                    const article = db.find(a => a.id == id);
+                    if (!article) {
+                        printLine(`<div class='line error'>Ошибка: Статья с ID ${id} не найдена.</div>`);
+                        break;
+                    }
+                    
+                    const content = articleContents[id];
+                    printLine(`
+                        <div class='article-content'>
+                            <div class='line accent' style='font-size: 1.2rem; font-weight: bold; margin-bottom: 10px;'>${article.title}</div>
+                            <div class='line dim' style='margin-bottom: 15px;'>Теги: ${article.tags} | Дата: ${article.date}</div>
+                            <div class='line' style='white-space: pre-wrap;'>${content}</div>
+                        </div>
+                    `);
+                    break;
+                case 'login':
+                    if (currentUser === 'admin') {
+                        printLine(`<div class='line yellow'>Вы уже авторизованы как администратор.</div>`);
+                    } else {
+                        printLine(`
+                            <div class='log-block dim'>
+                                <div class='line'>[Auth] Sending credentials to API...</div>
+                                <div class='line'>[Auth] Validating password hash... <span class='accent'>OK</span></div>
+                                <div class='line'>[Auth] Setting HttpOnly Cookie for session... <span class='accent'>Done</span></div>
+                            </div>
+                            <div class='line accent'>Успешная авторизация! Роль: Администратор.</div>
+                        `);
+                        currentUser = 'admin';
+                        promptSign.textContent = 'admin@devwiki:~$';
+                    }
+                    break;
+                case 'whoami':
+                    printLine(`<div class='line'>Current session: <span class='blue'>${currentUser}</span></div>`);
+                    break;
+                case 'clear':
+                    outputDiv.innerHTML = '';
+                    break;
+                case 'sudo':
+                    printLine(`<div class='line error'>bash: sudo: permission denied. This incident will be reported.</div>`);
+                    break;
+                default:
+                    printLine(`<div class='line error'>Команда не найдена: ${cmd}. Введите 'help' для списка команд.</div>`);
+            }
+        }
+
+        // Initialize Boot Sequence
+        window.onload = () => {
+            let delay = 0;
+            bootSequence.forEach((html, index) => {
+                setTimeout(() => {
+                    printLine(html);
+                }, delay);
+                delay += 300; // 300ms delay between boot lines
+            });
+            setTimeout(() => cmdInput.focus(), delay);
+        };
+
+    </script>
+</body>
+</html>
