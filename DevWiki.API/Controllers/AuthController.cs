@@ -35,12 +35,11 @@ namespace DevWiki.API.Controllers
             Response.Cookies.Append("token", token, new CookieOptions
             {
                 HttpOnly = true,
-                Secure = true,
                 SameSite = SameSiteMode.Strict,
                 Expires = System.DateTime.UtcNow.AddHours(2)
             });
 
-            return Ok(new { Message = "Logged in successfully" });
+            return Ok(new { Message = "Logged in successfully", Token = token });
         }
 
         [HttpPost("logout")]

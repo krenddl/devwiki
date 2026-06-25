@@ -50,7 +50,10 @@ builder.Services.AddAuthentication(Microsoft.AspNetCore.Authentication.JwtBearer
         {
             OnMessageReceived = context =>
             {
-                context.Token = context.Request.Cookies["token"];
+                if (context.Request.Cookies.ContainsKey("token"))
+                {
+                    context.Token = context.Request.Cookies["token"];
+                }
                 return System.Threading.Tasks.Task.CompletedTask;
             }
         };

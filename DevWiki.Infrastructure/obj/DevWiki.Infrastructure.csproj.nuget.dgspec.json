@@ -1,40 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Infrastructure\\DevWiki.Infrastructure.csproj": {}
+    "/home/amiri/projects/devwiki/devwiki/DevWiki.Infrastructure/DevWiki.Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Application\\DevWiki.Application.csproj": {
+    "/home/amiri/projects/devwiki/devwiki/DevWiki.Application/DevWiki.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Application\\DevWiki.Application.csproj",
+        "projectUniqueName": "/home/amiri/projects/devwiki/devwiki/DevWiki.Application/DevWiki.Application.csproj",
         "projectName": "DevWiki.Application",
-        "projectPath": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Application\\DevWiki.Application.csproj",
-        "packagesPath": "C:\\Users\\uryuqq\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Application\\obj\\",
+        "projectPath": "/home/amiri/projects/devwiki/devwiki/DevWiki.Application/DevWiki.Application.csproj",
+        "packagesPath": "/home/amiri/.nuget/packages/",
+        "outputPath": "/home/amiri/projects/devwiki/devwiki/DevWiki.Application/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\uryuqq\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/amiri/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
-            "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Domain\\DevWiki.Domain.csproj": {
-                "projectPath": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Domain\\DevWiki.Domain.csproj"
+              "/home/amiri/projects/devwiki/devwiki/DevWiki.Domain/DevWiki.Domain.csproj": {
+                "projectPath": "/home/amiri/projects/devwiki/devwiki/DevWiki.Domain/DevWiki.Domain.csproj"
               }
             }
           }
@@ -43,17 +36,10 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "10.0.200"
+        }
       },
       "frameworks": {
         "net8.0": {
-          "framework": "net8.0",
           "targetAlias": "net8.0",
           "dependencies": {
             "FluentValidation.DependencyInjectionExtensions": {
@@ -80,42 +66,41 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.27, 8.0.27]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.127/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Domain\\DevWiki.Domain.csproj": {
+    "/home/amiri/projects/devwiki/devwiki/DevWiki.Domain/DevWiki.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Domain\\DevWiki.Domain.csproj",
+        "projectUniqueName": "/home/amiri/projects/devwiki/devwiki/DevWiki.Domain/DevWiki.Domain.csproj",
         "projectName": "DevWiki.Domain",
-        "projectPath": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Domain\\DevWiki.Domain.csproj",
-        "packagesPath": "C:\\Users\\uryuqq\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Domain\\obj\\",
+        "projectPath": "/home/amiri/projects/devwiki/devwiki/DevWiki.Domain/DevWiki.Domain.csproj",
+        "packagesPath": "/home/amiri/.nuget/packages/",
+        "outputPath": "/home/amiri/projects/devwiki/devwiki/DevWiki.Domain/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\uryuqq\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/amiri/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
-            "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {}
           }
@@ -124,17 +109,10 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "10.0.200"
+        }
       },
       "frameworks": {
         "net8.0": {
-          "framework": "net8.0",
           "targetAlias": "net8.0",
           "imports": [
             "net461",
@@ -147,46 +125,45 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.27, 8.0.27]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.127/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Infrastructure\\DevWiki.Infrastructure.csproj": {
+    "/home/amiri/projects/devwiki/devwiki/DevWiki.Infrastructure/DevWiki.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Infrastructure\\DevWiki.Infrastructure.csproj",
+        "projectUniqueName": "/home/amiri/projects/devwiki/devwiki/DevWiki.Infrastructure/DevWiki.Infrastructure.csproj",
         "projectName": "DevWiki.Infrastructure",
-        "projectPath": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Infrastructure\\DevWiki.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\uryuqq\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Infrastructure\\obj\\",
+        "projectPath": "/home/amiri/projects/devwiki/devwiki/DevWiki.Infrastructure/DevWiki.Infrastructure.csproj",
+        "packagesPath": "/home/amiri/.nuget/packages/",
+        "outputPath": "/home/amiri/projects/devwiki/devwiki/DevWiki.Infrastructure/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\uryuqq\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/amiri/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
-            "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Application\\DevWiki.Application.csproj": {
-                "projectPath": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Application\\DevWiki.Application.csproj"
+              "/home/amiri/projects/devwiki/devwiki/DevWiki.Application/DevWiki.Application.csproj": {
+                "projectPath": "/home/amiri/projects/devwiki/devwiki/DevWiki.Application/DevWiki.Application.csproj"
               }
             }
           }
@@ -195,17 +172,10 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "10.0.200"
+        }
       },
       "frameworks": {
         "net8.0": {
-          "framework": "net8.0",
           "targetAlias": "net8.0",
           "dependencies": {
             "BCrypt.Net-Next": {
@@ -236,12 +206,18 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.27, 8.0.27]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.127/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

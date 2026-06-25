@@ -1,125 +1,428 @@
 @page "/"
 @using DevWiki.Client.Models
 @using DevWiki.Client.Services
+@using System.Text.RegularExpressions
+@using Microsoft.JSInterop
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Authorization
+@using Markdig
 @inject IArticleService ArticleService
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthStateProvider
 
-<PageTitle>DevWiki - Главная</PageTitle>
+<PageTitle>DevWiki - Terminal Client</PageTitle>
 
-<div class="d-flex justify-content-between align-items-center mb-5 mt-4">
-    <div>
-        <h1 class="text-gradient fw-bold mb-2" style="font-size: 3rem;">База знаний</h1>
-        <p class="text-muted fs-5 mb-0">Современная документация и заметки для разработчиков</p>
+<div class="terminal-window" @onclick="FocusInput">
+    <div class="terminal-header">
+        <div class="term-dots">
+            <div class="term-dot dot-close"></div>
+            <div class="term-dot dot-min"></div>
+            <div class="term-dot dot-max"></div>
+        </div>
+        bash — DevWiki-Blazor-WASM (tty1)
     </div>
     
-    <AuthorizeView>
-        <Authorized>
-            <a href="/articles/create" class="btn-modern btn-primary-modern text-decoration-none">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                Новая статья
-            </a>
-        </Authorized>
-    </AuthorizeView>
-</div>
-
-<div class="mb-4 position-relative">
-    <svg class="position-absolute text-muted" width="18" height="18" style="left: 1rem; top: 50%; transform: translateY(-50%);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-    <input type="text" class="form-control-modern ps-5" placeholder="Поиск по заголовку, содержанию или тегам..." @bind="searchTerm" @bind:event="oninput" @onkeyup="HandleSearch" />
-</div>
-
-@if (articles == null)
-{
-    <div class="row g-4">
-        @for (int i = 0; i < 4; i++)
+    <div class="terminal-body" id="terminalBody">
+        @if (!isNanoMode)
         {
-            <div class="col-md-6 d-flex">
-                <div class="modern-card d-flex flex-column w-100 p-4">
-                    <div class="skeleton skeleton-title"></div>
-                    <div class="skeleton skeleton-text short mb-4"></div>
-                    <div class="skeleton skeleton-text"></div>
-                    <div class="skeleton skeleton-text"></div>
-                    <div class="skeleton skeleton-text short mb-4"></div>
-                    <div class="mt-auto d-flex gap-2">
-                        <div class="skeleton skeleton-text short" style="width: 60px; height: 24px; border-radius: 999px;"></div>
-                        <div class="skeleton skeleton-text short" style="width: 80px; height: 24px; border-radius: 999px;"></div>
+            <div id="output">
+                @foreach (var line in outputLines)
+                {
+                    @((MarkupString)line)
+                }
+            </div>
+            
+            <div class="input-wrapper">
+                <span class="prompt-text" id="promptSign">@promptSign</span>
+                <input type="text" id="cmdInput" autocomplete="off" spellcheck="false" autofocus
+                       @bind="currentCommand" @bind:event="oninput" @onkeyup="HandleKeyUp" @ref="cmdInputRef" />
+            </div>
+        }
+        else
+        {
+            <div class="nano-container">
+                <div class="nano-header">
+                    GNU nano 7.2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; File: @nanoTitle
+                </div>
+                <div class="nano-body">
+                    <textarea class="nano-textarea" @bind="nanoContent" @bind:event="oninput" autofocus placeholder="Введите текст статьи здесь (с поддержкой Markdown)..."></textarea>
+                </div>
+                <div class="nano-footer">
+                    <div class="nano-shortcut" @onclick="SaveNanoArticle" style="cursor: pointer;">
+                        <span class="nano-key">^S</span> <span class="nano-action">Save</span>
+                    </div>
+                    <div class="nano-shortcut" @onclick="ExitNanoMode" style="cursor: pointer;">
+                        <span class="nano-key">^X</span> <span class="nano-action">Exit</span>
                     </div>
                 </div>
             </div>
         }
     </div>
-}
-else if (!articles.Any())
-{
-    <div class="modern-card text-center py-5">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="text-muted mb-4"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-        <h3 class="mb-3">Пока нет ни одной статьи</h3>
-        <p class="text-muted mb-4">
-            <AuthorizeView>
-                <Authorized>Создай первую запись в базе знаний.</Authorized>
-                <NotAuthorized><a href="/login" class="text-white text-decoration-underline">Войди в систему</a>, чтобы написать первую статью.</NotAuthorized>
-            </AuthorizeView>
-        </p>
-    </div>
-}
-else
-{
-    <div class="row g-4">
-        @foreach (var article in articles)
-        {
-            <div class="col-md-6 d-flex">
-                <a href="/articles/@article.Id" class="modern-card modern-card-hoverable text-decoration-none d-flex flex-column w-100">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <h4 class="mb-0 text-white">@article.Title</h4>
-                    </div>
-                    <div class="text-muted small mb-3">
-                        @article.CreatedAt.ToString("d MMMM yyyy")
-                    </div>
-                    
-                    <p class="text-muted flex-grow-1" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.6;">
-                        @article.Content
-                    </p>
-                    
-                    @if (article.Tags != null && article.Tags.Any())
-                    {
-                        <div class="mt-3 d-flex gap-2 flex-wrap">
-                            @foreach (var tag in article.Tags.Take(3))
-                            {
-                                <span class="badge-modern">@tag</span>
-                            }
-                            @if (article.Tags.Count > 3)
-                            {
-                                <span class="badge-modern">...</span>
-                            }
-                        </div>
-                    }
-                </a>
-            </div>
-        }
-    </div>
-}
+</div>
 
 @code {
-    private List<ArticleDto>? articles;
-    private string searchTerm = string.Empty;
-    private System.Threading.Timer? searchTimer;
-
+    private List<string> outputLines = new();
+    private string currentCommand = "";
+    private ElementReference cmdInputRef;
+    private string currentUser = "guest";
+    private string promptSign => $"{currentUser}@devwiki:~$";
+    
+    // Nano Mode State
+    private bool isNanoMode = false;
+    private string nanoTitle = "";
+    private string nanoContent = "";
+    private string nanoTags = "";
+    
     protected override async Task OnInitializedAsync()
     {
-        await LoadArticles();
-    }
-
-    private async Task LoadArticles()
-    {
-        articles = await ArticleService.GetArticlesAsync(searchTerm);
-        StateHasChanged();
-    }
-
-    private void HandleSearch()
-    {
-        searchTimer?.Dispose();
-        searchTimer = new System.Threading.Timer(async _ =>
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        if (authState.User.Identity?.IsAuthenticated ?? false)
         {
-            await InvokeAsync(LoadArticles);
-        }, null, 500, Timeout.Infinite); // 500ms debounce
+            currentUser = authState.User.Identity.Name ?? "user";
+        }
+
+        string[] bootSequence = {
+            "<div class='ascii-art'>  ____             __        ___ _    _ <br> |  _ \\  _____   _ \\ \\      / (_) | _(_) <br> | | | |/ _ \\ \\ / / \\ \\ /\\ / /| | |/ / | <br> | |_| |  __/\\ V /   \\ V  V / | |   <| | <br> |____/ \\___| \\_/     \\_/\\_/  |_|_|\\_\\_| v.1.0.0</div>",
+            "<div class='line dim'>[System] Loading dotnet.wasm... <span class='accent'>OK</span></div>",
+            "<div class='line dim'>[System] Initializing DevWiki.Client.dll... <span class='accent'>OK</span></div>",
+            $"<div class='line dim'>[State] Session started for {currentUser}.</div>",
+            "<div class='line'>Type <span class='blue'>'help'</span> to see available commands.</div><br>"
+        };
+
+        foreach (var line in bootSequence)
+        {
+            outputLines.Add(line);
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await ScrollToBottom();
+        if (firstRender)
+        {
+            await FocusInput();
+        }
+    }
+
+    private async Task FocusInput()
+    {
+        try
+        {
+            await JSRuntime.InvokeVoidAsync("window.focusElement", "cmdInput");
+        }
+        catch { }
+    }
+
+    private async Task ScrollToBottom()
+    {
+        try
+        {
+            await JSRuntime.InvokeVoidAsync("window.scrollToBottom", "terminalBody");
+        }
+        catch { }
+    }
+
+    private string HtmlEncode(string text)
+    {
+        if (string.IsNullOrEmpty(text)) return text;
+        return text.Replace("&", "&amp;")
+                   .Replace("<", "&lt;")
+                   .Replace(">", "&gt;")
+                   .Replace("\"", "&quot;")
+                   .Replace("'", "&#39;");
+    }
+
+    private async Task PrintLineAsync(string html)
+    {
+        outputLines.Add(html);
+        StateHasChanged();
+        await Task.Delay(20); // small delay to allow DOM update
+        await ScrollToBottom();
+    }
+
+    private async Task HandleKeyUp(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            string cmd = currentCommand.Trim();
+            currentCommand = "";
+            
+            await PrintLineAsync($"<div class='line'><span class='prompt-text'>{promptSign}</span> {HtmlEncode(cmd)}</div>");
+            
+            if (!string.IsNullOrEmpty(cmd))
+            {
+                await ProcessCommandAsync(cmd);
+            }
+        }
+    }
+
+    private async Task ProcessCommandAsync(string rawCmd)
+    {
+        var regex = new Regex(@"[^\s""']+|""([^""]*)""|'([^']*)'");
+        var matches = regex.Matches(rawCmd);
+        var args = new List<string>();
+        foreach (Match match in matches)
+        {
+            if (match.Groups[1].Success) args.Add(match.Groups[1].Value);
+            else if (match.Groups[2].Success) args.Add(match.Groups[2].Value);
+            else args.Add(match.Groups[0].Value);
+        }
+
+        if (args.Count == 0) return;
+
+        string cmd = args[0].ToLowerInvariant();
+
+        switch (cmd)
+        {
+            case "help":
+                await PrintLineAsync(
+                    "<div class='log-block'>" +
+                    "<div class='line'><span class='blue' style='width: 120px;'>ls [тег]</span> - GET /api/articles (Все статьи или фильтр по тегу)</div>" +
+                    "<div class='line'><span class='blue' style='width: 120px;'>search [q]</span> - GET /api/articles/search (Поиск по тексту)</div>" +
+                    "<div class='line'><span class='blue' style='width: 120px;'>read [id]</span> - Открыть статью по началу ID или номеру</div>" +
+                    "<div class='line'><span class='blue' style='width: 120px;'>create</span> - POST /api/articles (Создать: create 'Title' 'Content' 'tags')</div>" +
+                    "<div class='line'><span class='blue' style='width: 120px;'>nano</span> - Открыть редактор (nano 'Title' 'tags')</div>" +
+                    "<div class='line'><span class='blue' style='width: 120px;'>login</span> - Переход на страницу входа</div>" +
+                    "<div class='line'><span class='blue' style='width: 120px;'>clear</span> - Очистить экран</div>" +
+                    "</div>"
+                );
+                break;
+            case "ls":
+                string tagFilter = args.Count > 1 ? args[1].ToLower() : string.Empty;
+                if (!string.IsNullOrEmpty(tagFilter))
+                {
+                    await PrintLineAsync($"<div class='line dim'>[HTTP] GET /api/articles?tag={tagFilter}</div>");
+                }
+                else
+                {
+                    await PrintLineAsync("<div class='line dim'>[HTTP] GET /api/articles</div>");
+                }
+                
+                await Task.Delay(300); // simulate network delay
+                var lsArticles = await ArticleService.GetArticlesAsync(string.Empty);
+                
+                if (!string.IsNullOrEmpty(tagFilter))
+                {
+                    lsArticles = lsArticles?.Where(a => a.Tags != null && a.Tags.Contains(tagFilter)).ToList();
+                }
+
+                if (lsArticles == null || !lsArticles.Any())
+                {
+                    await PrintLineAsync($"<div class='line yellow'>Статьи не найдены.</div>");
+                    return;
+                }
+
+                string lsTableHtml = "<div class='log-block'>";
+                lsTableHtml += "<div class='article-table dim' style='border-bottom: 1px solid var(--term-border); padding-bottom: 5px;'><span>#</span><span>ID</span><span>TITLE</span><span>TAGS</span></div>";
+                
+                int idx = 1;
+                foreach(var a in lsArticles)
+                {
+                    string tagsStr = a.Tags != null ? string.Join(", ", a.Tags) : "";
+                    string shortId = a.Id.ToString().Split('-')[0];
+                    lsTableHtml += "<div class='article-table'>" +
+                        $"<span class='dim'>{idx++}</span>" +
+                        $"<span class='accent'>{shortId}</span>" +
+                        $"<span>{HtmlEncode(a.Title)}</span>" +
+                        $"<span class='dim'>[{tagsStr}]</span>" +
+                    "</div>";
+                }
+                lsTableHtml += "</div>";
+                await PrintLineAsync(lsTableHtml);
+                await PrintLineAsync($"<div class='line accent'>[HTTP] 200 OK ({lsArticles.Count} items fetched)</div>");
+                break;
+
+            case "search":
+                if (args.Count < 2)
+                {
+                    await PrintLineAsync("<div class='line error'>Укажите строку для поиска. Пример: search EF Core</div>");
+                    break;
+                }
+                string query = string.Join(" ", args.Skip(1)).Replace("\"", "").ToLower();
+                await PrintLineAsync($"<div class='line dim'>[HTTP] GET /api/articles?search={query}</div>");
+                
+                await Task.Delay(300);
+                var searchArticles = await ArticleService.GetArticlesAsync(query);
+                
+                if (searchArticles == null || !searchArticles.Any())
+                {
+                    await PrintLineAsync($"<div class='line yellow'>По запросу '{query}' ничего не найдено.</div>");
+                    return;
+                }
+
+                string sTableHtml = "<div class='log-block'>";
+                sTableHtml += "<div class='article-table dim' style='border-bottom: 1px solid var(--term-border); padding-bottom: 5px;'><span>#</span><span>ID</span><span>TITLE</span><span>TAGS</span></div>";
+                
+                int sIdx = 1;
+                foreach(var a in searchArticles)
+                {
+                    string tagsStr = a.Tags != null ? string.Join(", ", a.Tags) : "";
+                    string shortId = a.Id.ToString().Split('-')[0];
+                    sTableHtml += "<div class='article-table'>" +
+                        $"<span class='dim'>{sIdx++}</span>" +
+                        $"<span class='accent'>{shortId}</span>" +
+                        $"<span>{HtmlEncode(a.Title)}</span>" +
+                        $"<span class='dim'>[{tagsStr}]</span>" +
+                    "</div>";
+                }
+                sTableHtml += "</div>";
+                await PrintLineAsync(sTableHtml);
+                await PrintLineAsync($"<div class='line accent'>[HTTP] 200 OK (Найдено: {searchArticles.Count})</div>");
+                break;
+
+            case "read":
+                if (args.Count < 2)
+                {
+                    await PrintLineAsync("<div class='line error'>Ошибка: Укажите номер или ID статьи (например: read 1 или read 2a1b)</div>");
+                    break;
+                }
+                string idStr = args[1];
+                var allForRead = await ArticleService.GetArticlesAsync("");
+                if (allForRead == null || !allForRead.Any())
+                {
+                    await PrintLineAsync($"<div class='line error'>[HTTP] 404 Not Found. База данных пуста.</div>");
+                    break;
+                }
+
+                ArticleDto? article = null;
+                if (int.TryParse(idStr, out int parsedIndex) && parsedIndex > 0 && parsedIndex <= allForRead.Count && idStr.Length < 3)
+                {
+                    article = allForRead[parsedIndex - 1];
+                }
+                else
+                {
+                    article = allForRead.FirstOrDefault(a => a.Id.ToString().StartsWith(idStr, StringComparison.OrdinalIgnoreCase));
+                }
+                
+                if (article == null)
+                {
+                    await PrintLineAsync($"<div class='line error'>[HTTP] 404 Not Found. Статья '{idStr}' не найдена.</div>");
+                    break;
+                }
+                
+                string rTagsStr = article.Tags != null ? string.Join(", ", article.Tags) : "";
+                string dateStr = article.CreatedAt.ToString("yyyy-MM-dd");
+                
+                var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
+                string markdownHtml = Markdown.ToHtml(article.Content ?? "", pipeline);
+                
+                string readHtml = "<div class='article-content markdown-body'>" +
+                    $"<div class='line accent' style='font-size: 1.2rem; font-weight: bold; margin-bottom: 10px;'>{HtmlEncode(article.Title)}</div>" +
+                    $"<div class='line dim' style='margin-bottom: 15px; border-bottom: 1px dashed var(--term-border); padding-bottom: 10px;'>ID: {article.Id} | Теги: [{rTagsStr}] | Дата: {dateStr}</div>" +
+                    $"<div style='margin-top: 15px;'>{markdownHtml}</div>" +
+                "</div>";
+                await PrintLineAsync(readHtml);
+                await Task.Delay(50); // slight delay to ensure DOM is updated
+                try { await JSRuntime.InvokeVoidAsync("highlightCode"); } catch {}
+                break;
+
+            case "nano":
+                var authNano = await AuthStateProvider.GetAuthenticationStateAsync();
+                if (!(authNano.User.Identity?.IsAuthenticated ?? false))
+                {
+                    await PrintLineAsync("<div class='line error'>[HTTP] 401 Unauthorized. Требуется авторизация. Используйте 'login'.</div>");
+                    break;
+                }
+                if (args.Count < 2)
+                {
+                    await PrintLineAsync("<div class='line error'>Использование: nano 'Заголовок' 'tag1,tag2'</div>");
+                    break;
+                }
+                
+                nanoTitle = args[1];
+                nanoTags = args.Count > 2 ? args[2] : "";
+                nanoContent = "";
+                isNanoMode = true;
+                StateHasChanged();
+                break;
+
+            case "create":
+                var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+                if (!(authState.User.Identity?.IsAuthenticated ?? false))
+                {
+                    await PrintLineAsync("<div class='line error'>[HTTP] 401 Unauthorized. Требуется авторизация. Используйте 'login'.</div>");
+                    break;
+                }
+                if (args.Count < 3)
+                {
+                    await PrintLineAsync("<div class='line error'>Использование: create 'Заголовок' 'Текст статьи с \\n для переносов' 'tag1,tag2'</div>");
+                    break;
+                }
+                
+                string newTitle = args[1];
+                string newContent = args[2].Replace("\\n", "\n");
+                string newTags = args.Count > 3 ? args[3] : "";
+                
+                await PrintLineAsync("<div class='line dim'>[HTTP] POST /api/articles</div>");
+                await PrintLineAsync("<div class='line dim'>[Auth] Validating Session... <span class='accent'>Valid</span></div>");
+                
+                try 
+                {
+                    var dto = new CreateArticleDto { 
+                        Title = newTitle, 
+                        Content = newContent, 
+                        Tags = newTags 
+                    };
+                    await ArticleService.CreateArticleAsync(dto);
+                    await PrintLineAsync($"<div class='line accent'>[HTTP] 201 Created. Запись успешно добавлена.</div>");
+                }
+                catch (Exception ex)
+                {
+                    await PrintLineAsync($"<div class='line error'>Error: {ex.Message}</div>");
+                }
+                break;
+
+            case "login":
+                await PrintLineAsync("<div class='line yellow'>Перенаправление на страницу входа...</div>");
+                await Task.Delay(500);
+                NavigationManager.NavigateTo("/login");
+                break;
+                
+            case "whoami":
+                await PrintLineAsync($"<div class='line'>Role Claims: <span class='blue'>{currentUser}</span></div>");
+                break;
+                
+            case "clear":
+                outputLines.Clear();
+                break;
+                
+            default:
+                await PrintLineAsync($"<div class='line error'>bash: {HtmlEncode(cmd)}: command not found. Напиши 'help'.</div>");
+                break;
+        }
+    }
+
+    private async Task SaveNanoArticle()
+    {
+        isNanoMode = false;
+        StateHasChanged();
+        
+        await PrintLineAsync("<div class='line dim'>[HTTP] POST /api/articles (via Nano Editor)</div>");
+        
+        try 
+        {
+            var dto = new CreateArticleDto { 
+                Title = nanoTitle, 
+                Content = nanoContent, 
+                Tags = nanoTags 
+            };
+            await ArticleService.CreateArticleAsync(dto);
+            await PrintLineAsync($"<div class='line accent'>[HTTP] 201 Created. Запись '{HtmlEncode(nanoTitle)}' успешно добавлена.</div>");
+        }
+        catch (Exception ex)
+        {
+            await PrintLineAsync($"<div class='line error'>Error: {ex.Message}</div>");
+        }
+        
+        await FocusInput();
+    }
+
+    private async Task ExitNanoMode()
+    {
+        isNanoMode = false;
+        StateHasChanged();
+        await PrintLineAsync("<div class='line yellow'>[System] Nano editor closed without saving.</div>");
+        await FocusInput();
     }
 }
-

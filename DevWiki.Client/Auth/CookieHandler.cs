@@ -7,10 +7,24 @@ namespace DevWiki.Client.Auth
 {
     public class CookieHandler : DelegatingHandler
     {
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        private readonly Microsoft.JSInterop.IJSRuntime _jsRuntime;
+
+        public CookieHandler(Microsoft.JSInterop.IJSRuntime jsRuntime)
+        {
+            _jsRuntime = jsRuntime;
+        }
+
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             request.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
-            return base.SendAsync(request, cancellationToken);
+
+            var token = await _jsRuntime.InvokeAsync<string>("localStorage.getItem", new object[] { "authToken" });
+            if (!string.IsNullOrEmpty(token))
+            {
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            }
+
+            return await base.SendAsync(request, cancellationToken);
         }
     }
 }

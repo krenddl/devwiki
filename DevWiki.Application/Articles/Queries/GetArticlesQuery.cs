@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace DevWiki.Application.Articles.Queries
 {
-    public record GetArticlesQuery(string? SearchTerm = null) : IRequest<List<Article>>;
+    public record GetArticlesQuery(string? SearchTerm = null) : IRequest<List<DevWiki.Application.Articles.Queries.GetArticleById.ArticleDto>>;
 
     // 2. Обработчик (Handler). Он знает, КАК достать этот список.
-    public class GetArticlesQueryHandler : IRequestHandler<GetArticlesQuery, List<Article>>
+    public class GetArticlesQueryHandler : IRequestHandler<GetArticlesQuery, List<DevWiki.Application.Articles.Queries.GetArticleById.ArticleDto>>
     {
         private readonly IApplicationDbContext _context;
 
@@ -21,7 +21,7 @@ namespace DevWiki.Application.Articles.Queries
             _context = context;
         }
 
-        public async Task<List<Article>> Handle(GetArticlesQuery request, CancellationToken cancellationToken)
+        public async Task<List<DevWiki.Application.Articles.Queries.GetArticleById.ArticleDto>> Handle(GetArticlesQuery request, CancellationToken cancellationToken)
         {
             var query = _context.Articles
                 .Include(a => a.ArticleTags)
@@ -40,6 +40,14 @@ namespace DevWiki.Application.Articles.Queries
 
             return await query
                 .OrderByDescending(a => a.CreatedAt)
+                .Select(a => new DevWiki.Application.Articles.Queries.GetArticleById.ArticleDto
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    Content = a.Content,
+                    CreatedAt = a.CreatedAt,
+                    Tags = a.ArticleTags.Select(at => at.Tag.Name).ToList()
+                })
                 .ToListAsync(cancellationToken);
         }
     }

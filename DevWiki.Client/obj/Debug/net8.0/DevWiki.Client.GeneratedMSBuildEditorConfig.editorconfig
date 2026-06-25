@@ -4,8 +4,6 @@ build_property.EnableSingleFileAnalyzer =
 build_property.EnableTrimAnalyzer = false
 build_property.IncludeAllContentForSelfExtract = 
 build_property.TargetFramework = net8.0
-build_property.TargetFrameworkIdentifier = .NETCoreApp
-build_property.TargetFrameworkVersion = v8.0
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = 
 build_property.ProjectTypeGuids = 
@@ -15,69 +13,63 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = browser
 build_property.RootNamespace = DevWiki.Client
 build_property.RootNamespace = DevWiki.Client
-build_property.ProjectDir = C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Client\
+build_property.ProjectDir = /home/amiri/projects/devwiki/devwiki/DevWiki.Client/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = false
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\uryuqq\source\repos\DevWiki\DevWiki.Client
+build_property.MSBuildProjectDirectory = /home/amiri/projects/devwiki/devwiki/DevWiki.Client
 build_property._RazorSourceGeneratorDebug = 
-build_property.EffectiveAnalysisLevelStyle = 8.0
-build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/uryuqq/source/repos/DevWiki/DevWiki.Client/App.razor]
+[/home/amiri/projects/devwiki/devwiki/DevWiki.Client/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/uryuqq/source/repos/DevWiki/DevWiki.Client/Components/ToastContainer.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xUb2FzdENvbnRhaW5lci5yYXpvcg==
+[/home/amiri/projects/devwiki/devwiki/DevWiki.Client/Components/ToastContainer.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Ub2FzdENvbnRhaW5lci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/uryuqq/source/repos/DevWiki/DevWiki.Client/Pages/Articles/ArticleDetails.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXJ0aWNsZXNcQXJ0aWNsZURldGFpbHMucmF6b3I=
+[/home/amiri/projects/devwiki/devwiki/DevWiki.Client/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0L01haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/uryuqq/source/repos/DevWiki/DevWiki.Client/Pages/Articles/CreateArticle.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXJ0aWNsZXNcQ3JlYXRlQXJ0aWNsZS5yYXpvcg==
+[/home/amiri/projects/devwiki/devwiki/DevWiki.Client/Pages/Articles/ArticleDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQXJ0aWNsZXMvQXJ0aWNsZURldGFpbHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/uryuqq/source/repos/DevWiki/DevWiki.Client/Pages/Articles/EditArticle.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXJ0aWNsZXNcRWRpdEFydGljbGUucmF6b3I=
+[/home/amiri/projects/devwiki/devwiki/DevWiki.Client/Pages/Articles/CreateArticle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQXJ0aWNsZXMvQ3JlYXRlQXJ0aWNsZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/uryuqq/source/repos/DevWiki/DevWiki.Client/Pages/Auth/Login.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxMb2dpbi5yYXpvcg==
+[/home/amiri/projects/devwiki/devwiki/DevWiki.Client/Pages/Articles/EditArticle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQXJ0aWNsZXMvRWRpdEFydGljbGUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/uryuqq/source/repos/DevWiki/DevWiki.Client/Pages/Auth/Register.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxSZWdpc3Rlci5yYXpvcg==
+[/home/amiri/projects/devwiki/devwiki/DevWiki.Client/Pages/Auth/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQXV0aC9Mb2dpbi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/uryuqq/source/repos/DevWiki/DevWiki.Client/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+[/home/amiri/projects/devwiki/devwiki/DevWiki.Client/Pages/Auth/Register.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQXV0aC9SZWdpc3Rlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/uryuqq/source/repos/DevWiki/DevWiki.Client/Pages/Home.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
+[/home/amiri/projects/devwiki/devwiki/DevWiki.Client/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ291bnRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/uryuqq/source/repos/DevWiki/DevWiki.Client/Pages/NotFound.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTm90Rm91bmQucmF6b3I=
+[/home/amiri/projects/devwiki/devwiki/DevWiki.Client/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/uryuqq/source/repos/DevWiki/DevWiki.Client/Pages/Weather.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcV2VhdGhlci5yYXpvcg==
+[/home/amiri/projects/devwiki/devwiki/DevWiki.Client/Pages/NotFound.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTm90Rm91bmQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/uryuqq/source/repos/DevWiki/DevWiki.Client/_Imports.razor]
+[/home/amiri/projects/devwiki/devwiki/DevWiki.Client/Pages/Weather.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvV2VhdGhlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/amiri/projects/devwiki/devwiki/DevWiki.Client/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/uryuqq/source/repos/DevWiki/DevWiki.Client/Layout/MainLayout.razor]
-build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE1haW5MYXlvdXQucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = b-gzg9qgddce
-
-[C:/Users/uryuqq/source/repos/DevWiki/DevWiki.Client/Layout/NavMenu.razor]
-build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE5hdk1lbnUucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = b-2ofdso37up

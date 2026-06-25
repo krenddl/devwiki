@@ -1,0 +1,7 @@
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Thu, 25 Jun 2026 12:02:06 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+{"id":"7387289c-dfb6-400b-8eb1-70e8efa264d1","username":"testuser5","role":"Viewer"}

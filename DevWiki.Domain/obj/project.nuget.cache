@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "RtZ7rwXrL7Y=",
+  "dgSpecHash": "yzkvOAWyxgsfNSjwWLFvO9g8e5l/tsnUWAJnNvqMsEC0RLMeW9/2rdmk+grIkgOJI1zlZdlZO+3StkJtw51ddg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\uryuqq\\source\\repos\\DevWiki\\DevWiki.Domain\\DevWiki.Domain.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/home/amiri/projects/devwiki/devwiki/DevWiki.Domain/DevWiki.Domain.csproj",
+  "expectedPackageFiles": [
+    "/home/amiri/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.27/microsoft.aspnetcore.app.ref.8.0.27.nupkg.sha512"
+  ],
   "logs": []
 }

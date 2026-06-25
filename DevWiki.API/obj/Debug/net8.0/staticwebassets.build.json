@@ -1,1 +1,11 @@
-{"Version":1,"Hash":"/h8392bj52IKZFTSdqg6pYSQQscgRpma6+F44pI+AS4=","Source":"DevWiki.API","BasePath":"/","Mode":"Root","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
+{
+  "Version": 1,
+  "Hash": "Fex2EqvNRC/ugttfNn8TDhfstqsezS5rs4uddgkLExg=",
+  "Source": "DevWiki.API",
+  "BasePath": "_content/DevWiki.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

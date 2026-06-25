@@ -41,12 +41,12 @@ namespace DevWiki.API.Middleware
 
             // Here we can map specific exceptions to specific HTTP status codes.
             // For example:
-            // if (exception is ValidationException validationException)
-            // {
-            //     statusCode = StatusCodes.Status400BadRequest;
-            //     title = "Validation Error";
-            //     detail = "One or more validation errors occurred.";
-            // }
+            if (exception is FluentValidation.ValidationException validationException)
+            {
+                statusCode = StatusCodes.Status400BadRequest;
+                title = "Validation Error";
+                detail = validationException.Message;
+            }
             // else if (exception is NotFoundException notFoundException)
             // {
             //     statusCode = StatusCodes.Status404NotFound;
